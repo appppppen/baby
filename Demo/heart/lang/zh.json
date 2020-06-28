@@ -1,10 +1,11 @@
 {
-    "title": "Heart",
-    "text":[
+    "title": "心形曲线",
+    "text": [
         "<font color='#E81111'>sin α</font> 与 <font color='#E817FF'>cos α</font>",
         "<font color='#1089FF'>tan α</font> 与 <font color='#00B718'>sec α</font>",
         "<font color='#21D2BD'>csc α</font> 与 <font color='#FF7607'>cot α</font>",
         "<font color='#00B718'>sec α</font> 与 <font color='#E817FF'>cos α</font>",
         "<font color='#E81111'>sin α</font> 与 <font color='#21D2BD'>csc α</font>",
-        "<font color='#1089FF'>tan α</font> 、<font color='#E81111'>sin α</font> 与 <font color='#E817FF'>cos α</font>"]
+        "<font color='#1089FF'>tan α</font> 、<font color='#E81111'>sin α</font> 与 <font color='#E817FF'>cos α</font>"
+    ]
 }
