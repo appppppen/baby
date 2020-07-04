@@ -1,13 +1,12 @@
-<!DOCTYPE html><html xmlns=http://www.w3.org/1999/xhtml><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=screen-orientation content=landscape><meta name=x5-orientation content=landscape><meta name=full-screen content=yes><meta name=x5-fullscreen content=true><meta name=renderer content=webkit><link rel=icon href=./static/favicon.ico><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>测试</title><style>.loadingBg {
+<!DOCTYPE html><html xmlns=http://www.w3.org/1999/xhtml><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=screen-orientation content=landscape><meta name=x5-orientation content=landscape><meta name=full-screen content=yes><meta name=x5-fullscreen content=true><meta name=renderer content=webkit><link rel=icon href=./static/favicon.ico><link rel=stylesheet href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons"><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Points3D</title><style>.loadingBg {
             position: absolute;
             z-index: 999;
             width: 100%;
             height: 100%;
-            background: #424156;
+            background: #a98aff;
             margin: 0;
             padding: 0;
             text-align: center;
-
         }
 
         .loadingBg:before {
@@ -17,57 +16,24 @@
             vertical-align: middle;
         }
 
-        .loadingIco {
-            width: 60px;
-            height: 60px;
-            display: inline-block;
-            vertical-align: middle;
+        .spanning {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            margin-left: -100px;
+            margin-top: -100px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            background-image: url('./static/ic_launcher.png');
         }
 
-        .ico_animation_base {
-            opacity: 0;
-            animation: loading_ani 2.60s linear infinite;
-        }
-
-        .ico-1 {
-            animation-delay: 0.5s;
-        }
-
-        .ico-2 {
-            animation-delay: 0.74s;
-        }
-
-        .ico-3 {
-            animation-delay: 0.98s;
-        }
-
-        .ico-4 {
-
-            animation-delay: 1.22s;
-        }
-
-        .ico-5 {
-            animation-delay: 1.46s;
-        }
-
-        .ico-6 {
-            animation-delay: 1.7s;
-        }
-
-        /* 转圈 */
-        @keyframes loading_ani {
-
-            0%,
-            35.5%,
-            100% {
-                opacity: 0;
-            }
-
-            17% {
-                opacity: 1;
-            }
-        }</style><link rel="shortcut icon" href=./favicon.ico><link href="css/Points3D.css?st=667cf1798be6b47c064a4a8cbbe71d93" rel=stylesheet></head><body style="padding: 0;margin: 0;"><div id=app></div><div id=loading class=loadingBg><div style="position: fixed;width: 200px;height: 200px;top: 50%;left: 50%;margin-left: -100px;
-      margin-top: -100px;background-repeat: no-repeat;background-position: center;background-size: contain;background-image: url('./static/ic_launcher.png');"></div></div><script type=text/javascript src="js/manifest.js?a=6052d50a0afdf0254794"></script><script type=text/javascript src="js/Points3D.js?a=1862e0987da50ee1f48c"></script></body></html><script type=text/javascript>;
+        @font-face {
+            font-family: "impact";
+            src: url("./static/impact.ttf") format("truetype");
+        }</style><link rel="shortcut icon" href=./favicon.ico><link href="css/Points3D.css?st=2aa4af6476eb366b9da499e9b3fde9b8" rel=stylesheet></head><body style="padding: 0;margin: 0;"><script src=./static/js/ammo.js></script><script src=https://preview.babylonjs.com/Oimo.js></script><script src=./static/js/qrcode.js></script><div id=app></div><div id=loading class=loadingBg><div class=spanning></div></div><script type=text/javascript src="js/manifest.js?a=6052d50a0afdf0254794"></script><script type=text/javascript src="js/Points3D.js?a=b43dfdc5ad1573314ef8"></script></body></html><script type=text/javascript>;
     (function () {
 
         handleAddListener('load', getTiming)
