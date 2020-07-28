@@ -33,7 +33,7 @@ glsl 中的向量(vec2,vec3,vec4)往往有特殊的含义,比如可能代表了�
 
 `vector.stpq` 其中 rgba 可以任意组合
 
-```c
+```clike
 vec4 v=vec4(1.0,2.0,3.0,1.0);
 float x = v.x; //1.0
 float x1 = v.r; //1.0
@@ -80,7 +80,7 @@ _ps 左值与右值:_
 
 glsl 中,没有隐式类型转换,原则上 glsl 要求任何表达式左右两侧(l-value),(r-value)的类型必须一致 也就是说以下表达式都是错误的:
 
-```c
+```clike
 int a =2.0; //错误,r-value为float 而 lvalue 为int.
 int a =1.0+2;
 float a =2;
@@ -116,7 +116,7 @@ int 与 vec,mat 之间是不可运算的, 因为 vec 和 mat 中的每一个分�
 
 下面枚举了几种 float 与 vec,mat 运算的情况
 
-```c
+```clike
 vec3 a = vec3(1.0, 2.0, 3.0);
 mat3 m = mat3(1.0);
 float s = 10.0;
@@ -134,7 +134,7 @@ mat3 m3 = m * s; // = mat3(10.0)
 它们的计算方式是两操作数在同位置上的分量分别进行运算,其本质还是逐分量进行的,这和上面所说的 float 类型的
 逐分量运算可能有一点点差异,相同的是 vec 与 vec 运算结果还是 vec, 且阶数不变.
 
-```c
+```clike
 vec3 a = vec3(1.0, 2.0, 3.0);
 vec3 b = vec3(0.1, 0.2, 0.3);
 vec3 c = a + b; // = vec3(1.1, 2.2, 3.3)
@@ -149,7 +149,7 @@ vec3 d = a * b; // = vec3(0.1, 0.4, 0.9)
 
 它们的计算方式和线性代数中的矩阵乘法相同,不是逐分量运算.
 
-```c
+```clike
 vec2 v = vec2(10., 20.);
 mat2 m = mat2(1., 2.,  3., 4.);
 vec2 w = m * v; // = vec2(1. * 10. + 3. * 20., 2. * 10. + 4. * 20.)
@@ -174,7 +174,7 @@ vec2 w = v * m; // = vec2(1. * 10. + 2. * 20., 3. * 10. + 4. * 20.)
 
 在 mat 与 mat 的运算中, 除了乘法是线性代数中的矩阵乘法外.其余的运算任为逐分量运算.简单说就是只有乘法是特殊的,其余都和 vec 与 vec 运算类似.
 
-```c
+```clike
 mat2 a = mat2(1., 2.,  3., 4.);
 mat2 b = mat2(10., 20.,  30., 40.);
 mat2 c = a * b; //mat2(1.*10.+3.*20.,2.*10.+4.*20.,1.* 30.+3.*40.,2.* 30.+4.*40.);
@@ -208,7 +208,7 @@ const 变量必须在声明时就初始化 `const vec3 v3 = vec3(0.,0.,0.)`
 
 函数参数只能使用 const 限定符.
 
-```c
+```clike
 struct light {
         vec4 color;
         vec3 pos;
@@ -224,7 +224,7 @@ attribute 变量是`全局`且`只读`的,它只能在 vertex shader 中使用,�
 一般 attribute 变量用来放置程序传递来的模型顶点,法线,颜色,纹理等数据它可以访问数据缓冲区
 (还记得**gl.vertexAttribPointer**这个函数吧)
 
-```c
+```clike
 attribute vec4 a_Position;
 
 ```
@@ -235,7 +235,7 @@ uniform 变量是`全局`且`只读`的,在整个 shader 执行完毕前其值�
 一般我们使用 uniform 变量来放置外部程序传递来的环境数据(如点光源位置,模型的变换矩阵等等)
 这些数据在运行中显然是不需要被改变的.
 
-```c
+```clike
 uniform vec4 lightPosition;
 
 ```
@@ -245,7 +245,7 @@ uniform vec4 lightPosition;
 varying 类型变量是 vertex shader 与 fragment shader 之间的信使,一般我们在 vertex shader 中修改它然后在 fragment shader 使用它,但不能在
 fragment shader 中修改它.
 
-```c
+```clike
 //顶点着色器
 varying vec4 v_Color;
 void main(){
@@ -288,7 +288,7 @@ void main() {
 
 glsl 允许在程序的最外部声明函数.函数不能嵌套,不能递归调用,且必须声明返回值类型(无返回值时声明为 void) 在其他方面 glsl 函数与 c 函数非常类似.
 
-```c
+```clike
 vec4 getPosition(){
     vec4 v4 = vec4(0.,0.,0.,1.);
     return v4;
@@ -312,7 +312,7 @@ glsl 中变量可以在声明的时候初始化,`float pSize = 10.0` 也可以�
 
 聚合类型对象如(向量,矩阵,数组,结构) 需要使用其构造函数来进行初始化. `vec4 color = vec4(0.0, 1.0, 0.0, 1.0);`
 
-```c
+```clike
 //一般类型
 float pSize = 10.0;
 float pSize1;
@@ -341,7 +341,7 @@ const float c[3] = float[3](5.0, 7.2, 1.1);
 
 glsl 可以使用构造函数进行显式类型转换,各值如下:
 
-```c
+```clike
 bool t= true;
 bool f = false;
 
@@ -365,7 +365,7 @@ glsl 在进行光栅化着色的时候,会产生大量的浮点数运算,这些�
 
 在变量前面加上 `highp` `mediump` `lowp` 即可完成对该变量的精度声明.
 
-```
+```clike
 lowp float color;
 varying mediump vec2 Coord;
 lowp ivec2 foo(lowp mat3);
@@ -380,7 +380,7 @@ highp mat4 m;
 变量的精度首先是由精度限定符决定的,如果没有精度限定符,则要寻找其右侧表达式中,已经确定精度的变量,一旦找到,那么整个表达式都将在该精度下运行.如果找到多个,
 则选择精度较高的那种,如果一个都找不到,则使用默认或更大的精度类型.
 
-```c
+```clike
 uniform highp float h1;
 highp float h2 = 2.3 * 4.7; //运算过程和结果都 是高精度
 mediump float m;
@@ -400,7 +400,7 @@ f(3.3); //传入的 3.3是高精度
 所以我们需要使用`invariant` 关键字来显式要求计算结果必须精确一致. 当然我们也可使用 `#pragma STDGL invariant(all)`来命令所有输出变量必须精确一致,
 但这样会限制编译器优化程度,降低性能.
 
-```c
+```clike
 #pragma STDGL invariant(all) //所有输出变量为 invariant
 invariant varying texCoord; //varying在传递数据的时候声明为invariant
 
@@ -416,7 +416,7 @@ invariant varying texCoord; //varying在传递数据的时候声明为invariant
 
 我们来举例说明:
 
-```c
+```clike
 invariant varying lowp float color; // invariant > storage > precision
 
 void doubleSize(const in lowp float s){ //storage > parameter > precision
@@ -429,7 +429,7 @@ void doubleSize(const in lowp float s){ //storage > parameter > precision
 
 以 # 开头的是预编译指令,常用的有:
 
-```c
+```clike
 #define #undef #if #ifdef #ifndef #else
 #elif #endif #error #pragma #extension #version #line
 ```
@@ -450,7 +450,7 @@ void doubleSize(const in lowp float s){ //storage > parameter > precision
 
 1.如何通过判断系统环境,来选择合适的精度:
 
-```c
+```clike
 #ifdef GL_ES //
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
@@ -463,7 +463,7 @@ precision mediump float;
 
 2.自定义宏:
 
-```c
+```clike
 #define NUM 100
 #if NUM==100
 #endif
@@ -551,7 +551,7 @@ glsl 中还有一种内置的 uniform 状态变量, `gl_DepthRange` 它用来表
 
 结构如下:
 
-```c
+```clike
 struct gl_DepthRangeParameters {
  highp float near; // n
  highp float far; // f
@@ -568,7 +568,7 @@ struct gl_DepthRangeParameters {
 glsl 的流控制和 c 语言非常相似,这里不必再做过多说明,唯一不同的是片段着色器中有一种特殊的控制流`discard`.
 使用 discard 会退出片段着色器，不执行后面的片段着色操作。片段也不会写入帧缓冲区。
 
-```c
+```clike
 for (l = 0; l < numLights; l++)
 {
     if (!lightExists[l]);
@@ -679,7 +679,7 @@ mat 可以为任意类型矩阵.
 
 bvec 指的是由 bool 类型组成的一个向量:
 
-```c
+```clike
 vec3 v3= vec3(0.,0.,0.);
 vec3 v3_1= vec3(1.,1.,1.);
 bvec3 aa= lessThan(v3,v3_1); //bvec3(true,true,true)
@@ -706,7 +706,7 @@ bvec3 aa= lessThan(v3,v3_1); //bvec3(true,true,true)
 
 以下函数只在 vertex shader 中可用:
 
-```c
+```clike
 vec4 texture2DLod(sampler2D sampler, vec2 coord, float lod);
 vec4 texture2DProjLod(sampler2D sampler, vec3 coord, float lod);
 vec4 texture2DProjLod(sampler2D sampler, vec4 coord, float lod);
@@ -716,7 +716,7 @@ vec4 textureCubeLod(samplerCube sampler, vec3 coord, float lod);
 
 以下函数只在 fragment shader 中可用:
 
-```c
+```clike
 vec4 texture2D(sampler2D sampler, vec2 coord, float bias);
 vec4 texture2DProj(sampler2D sampler, vec3 coord, float bias);
 vec4 texture2DProj(sampler2D sampler, vec4 coord, float bias);
@@ -725,7 +725,7 @@ vec4 textureCube(samplerCube sampler, vec3 coord, float bias);
 
 在 vertex shader 与 fragment shader 中都可用:
 
-```c
+```clike
 vec4 texture2D(sampler2D sampler, vec2 coord);
 vec4 texture2DProj(sampler2D sampler, vec3 coord);
 vec4 texture2DProj(sampler2D sampler, vec4 coord);
@@ -738,7 +738,7 @@ vec4 textureCube(samplerCube sampler, vec3 coord);
 
 **Vertex Shader:**
 
-```c
+```clike
 uniform mat4 mvp_matrix; //透视矩阵 * 视图矩阵 * 模型变换矩阵
 uniform mat3 normal_matrix; //法线变换矩阵(用于物体变换后法线跟着变换)
 uniform vec3 ec_light_dir; //光照方向
@@ -760,7 +760,7 @@ void main(void)
 
 **Fragment Shader:**
 
-```c
+```clike
 precision mediump float;
 uniform sampler2D t_reflectance;
 uniform vec4 i_ambient;
